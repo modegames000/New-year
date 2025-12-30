@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year Wishes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff69b4, #f0f8ff, #ffd700);
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: bounceIn 2s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            animation: slideIn 1s ease-out 1s both;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .friend-input {
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #ff69b4;
+            border-radius: 5px;
+            width: 200px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #ff1493;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .wishes-list {
+            margin-top: 30px;
+        }
+        .wish {
+            background-color: #ffe4e1;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 1s ease-in both;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1em;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-100vh); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    <div id="snowContainer"></div>
+    <h1>Happy New Year!</h1>
+    <p>Wishing all my wonderful female friends a year filled with joy, love, and endless adventures. May 2026 bring you happiness, success, and unforgettable moments!</p>
+    
+    <p>Happy new year,<br>With love and best wishes</p>
+
+    <script>
+        let wishCount = 0;
+        const wishes = [
+            "May your New Year be as bright and beautiful as you are!",
+            "Here's to new beginnings and making amazing memories together!",
+            "Wishing you a year of laughter, love, and all your dreams coming true!",
+            "You're an inspiration! Cheers to an incredible 2024!",
+            "May the New Year bring you joy, peace, and endless happiness!"
+        ];
+
+        function addWish() {
+            const friendName = document.getElementById('friendName').value.trim();
+            if (friendName === '') {
+                alert('Please enter a friend\'s name!');
+                return;
+            }
+            
+            const wishesList = document.getElementById('wishesList');
+            const wishDiv = document.createElement('div');
+            wishDiv.className = 'wish';
+            wishDiv.innerHTML = `<h3>To ${friendName}</h3><p>${wishes[Math.floor(Math.random() * wishes.length)]}</p>`;
+            wishesList.appendChild(wishDiv);
+            
+            setTimeout(() => {
+                wishDiv.style.display = 'block';
+            }, 100);
+            
+            document.getElementById('friendName').value = '';
+            wishCount++;
+            
+            if (wishCount % 3 === 0) {
+                createFirework();
+            }
+        }
+
+        function createFirework() {
+            const fireworks = document.getElementById('fireworks');
+            for (let i = 0; i < 15; i++) {
+                const firework = document.createElement('div');
+                firework.style.position = 'absolute';
+                firework.style.width = '5px';
+                firework.style.height = '5px';
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                firework.style.left = Math.random() * 100 + '%';
+                firework.style.top = Math.random() * 100 + '%';
+                firework.style.animation = 'explode 1s ease-out forwards';
+                fireworks.appendChild(firework);
+                
+                setTimeout(() => {
+                    fireworks.removeChild(firework);
+                }, 1000);
+            }
+        }
+
+        // Create falling snowflakes
+        function createSnowflakes() {
+            const snowContainer = document.getElementById('snowContainer');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDelay = Math.random() * 10 + 's';
+                snowflake.style.fontSize = Math.random() * 1.5 + 0.5 + 'em';
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Initialize snowflakes on load
+        window.onload = createSnowflakes;
+
+        // Add explode animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes explode {
+                0% { transform: scale(1); opacity: 1; }
+                100% { transform: scale(15); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
